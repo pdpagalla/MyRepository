@@ -66,11 +66,5 @@ public class Products extends Base {
         click(productPriceOKButton);
     }
 
-    /*public void enterProductPrice(String price){
-        driver.switchTo().defaultContent();
-        produtSettingsPrice.sendKeys(price);
-        click(productPriceOKButton);
-    }*/
-
-
+    
 }
