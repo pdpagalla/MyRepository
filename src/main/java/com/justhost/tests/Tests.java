@@ -4,17 +4,25 @@ import com.justhost.base.Base;
 import org.testng.annotations.*;
 import pageobjects.AdminLogin;
 import pageobjects.DashBoard;
+import pageobjects.Products;
 
 public class Tests extends Base {
 
   @BeforeClass
-    public void beforeTest() { navigatToURl(); }
+    public void beforeClass() { navigatToURl(); }
 
-    @Test(enabled=true)
-    public void addCategory() {
-
+   // @BeforeTest
+    public void beforeTest(){
         AdminLogin adminLogin = new AdminLogin(driver);
         adminLogin.login();
+
+    }
+
+    @Test(enabled=false)
+    public void addCategory() throws InterruptedException {
+
+       /* AdminLogin adminLogin = new AdminLogin(driver);
+        adminLogin.login();*/
 
         DashBoard dashBoard = new DashBoard(driver);
         //dashBoard.verifyTitle();
@@ -23,38 +31,29 @@ public class Tests extends Base {
         dashBoard.clickAddCategory();
         dashBoard.addNewProducts();
 
+    }
 
-
-
-
-
-
-        /*Properties props = new Properties();
-        InputStream inStream = getClass().getClassLoader().getResourceAsStream("environment.properties");
-            props.load(inStream);
-        Object cats = props.get("Title");
-        String[] noOfItems= cats.toString().split(",");
-
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        URL url = loader.getResource("Categories");
-        String path = url.getPath();
-
-        for(String str:noOfItems) {
-            for(File str1: new File(path).listFiles()) {
-                if(str1.toString().contains(str)) {
-                    System.out.println(str1.toString());
-                    driver.findElement(By.name("title")).sendKeys(str);
-                    driver.findElement(By.name("image")).sendKeys(str1.toString());
-//			    		driver.findElement(By.name("submit")).click();
-                }
-            }
-        }*/
+    @Test(enabled=true)
+    public void addProduct(){
+        AdminLogin adminLogin = new AdminLogin(driver);
+        adminLogin.login();
+        DashBoard dashBoard = new DashBoard(driver);
+        //dashBoard.verifyTitle();
+        dashBoard.clickMainMenu();
+        dashBoard.clickProduct();
+        Products prod = new Products(driver);
+        prod.clickAddProductButton();
+        prod.selectCategory("Beer");
+        prod.selectDrinkProductType();
+        prod.clickProductType4();
+        prod.clickEditProductSetting("150");
+        //prod.enterProductPrice("150");
 
     }
 
     @AfterClass
     public void afterTest(){
-        driver.close();
+        //driver.close();
     }
 
 }
